@@ -102,7 +102,13 @@
       "add": "Add participant",
       "John": "John",
       "Jane": "Jane",
-      "Jack": "Jack"
+    "Jack": "Jack"
+    },
+    "DefaultSplitting": {
+      "title": "Default splitting",
+      "description": "Set a default factor for each participant. This will pre-fill new expenses.",
+      "factorLabel": "Factor",
+      "reset": "Reset factors"
     },
     "Settings": {
       "title": "Local settings",

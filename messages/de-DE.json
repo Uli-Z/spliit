@@ -101,7 +101,13 @@
       "add": "Mitglied hinzufügen",
       "John": "Johannes",
       "Jane": "Janina",
-      "Jack": "Jakob"
+    "Jack": "Jakob"
+    },
+    "DefaultSplitting": {
+      "title": "Standardaufteilung",
+      "description": "Lege einen Standardfaktor pro Mitglied fest. Dieser wird für neue Ausgaben übernommen.",
+      "factorLabel": "Faktor",
+      "reset": "Faktoren zurücksetzen"
     },
     "Settings": {
       "title": "Lokale Einstellungen",

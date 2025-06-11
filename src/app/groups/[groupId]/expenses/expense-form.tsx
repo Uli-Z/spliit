@@ -43,6 +43,7 @@ import {
 import { calculateShare } from '@/lib/totals'
 import { cn } from '@/lib/utils'
 import { AppRouterOutput } from '@/trpc/routers/_app'
+import { trpc } from '@/trpc/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RecurrenceRule } from '@prisma/client'
 import { Save } from 'lucide-react'
@@ -74,6 +75,18 @@ const getDefaultSplittingOptions = (
       participant: id,
       shares: '1' as unknown as number,
     })),
+  }
+
+  const serverDefault = group.defaultSplittingOptions as SplittingOptions | null
+  if (serverDefault) {
+    const paidFor =
+      serverDefault.paidFor === null
+        ? defaultValue.paidFor
+        : serverDefault.paidFor.map((pf) => ({
+            participant: pf.participant,
+            shares: String(pf.shares / 100) as unknown as number,
+          }))
+    return { splitMode: serverDefault.splitMode, paidFor }
   }
 
   if (typeof localStorage === 'undefined') return defaultValue
@@ -112,8 +125,9 @@ const getDefaultSplittingOptions = (
 async function persistDefaultSplittingOptions(
   groupId: string,
   expenseFormValues: ExpenseFormValues,
+  saveOnServer?: (opts: SplittingOptions) => Promise<void>,
 ) {
-  if (localStorage && expenseFormValues.saveDefaultSplittingOptions) {
+  if (expenseFormValues.saveDefaultSplittingOptions) {
     const computePaidFor = (): SplittingOptions['paidFor'] => {
       if (expenseFormValues.splitMode === 'EVENLY') {
         return expenseFormValues.paidFor.map(({ participant }) => ({
@@ -131,11 +145,15 @@ async function persistDefaultSplittingOptions(
       splitMode: expenseFormValues.splitMode,
       paidFor: computePaidFor(),
     } satisfies SplittingOptions
-
-    localStorage.setItem(
-      `${groupId}-defaultSplittingOptions`,
-      JSON.stringify(splittingOptions),
-    )
+    if (localStorage) {
+      localStorage.setItem(
+        `${groupId}-defaultSplittingOptions`,
+        JSON.stringify(splittingOptions),
+      )
+    }
+    if (saveOnServer) {
+      await saveOnServer(splittingOptions)
+    }
   }
 }
 
@@ -247,9 +265,13 @@ export function ExpenseForm({
   })
   const [isCategoryLoading, setCategoryLoading] = useState(false)
   const activeUserId = useActiveUser(group.id)
+  const { mutateAsync: setDefaultSplitting } =
+    trpc.groups.setDefaultSplittingOptions.useMutation()
 
   const submit = async (values: ExpenseFormValues) => {
-    await persistDefaultSplittingOptions(group.id, values)
+    await persistDefaultSplittingOptions(group.id, values, async (opts) => {
+      await setDefaultSplitting({ groupId: group.id, splittingOptions: opts })
+    })
     return onSubmit(values, activeUserId ?? undefined)
   }
 

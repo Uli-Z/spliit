@@ -318,6 +318,18 @@ export async function updateGroup(
   })
 }
 
+export async function setGroupDefaultSplittingOptions(
+  groupId: string,
+  splittingOptions: SplittingOptions,
+) {
+  await prisma.group.update({
+    where: { id: groupId },
+    data: {
+      defaultSplittingOptions: splittingOptions,
+    },
+  })
+}
+
 export async function getGroup(groupId: string) {
   return prisma.group.findUnique({
     where: { id: groupId },

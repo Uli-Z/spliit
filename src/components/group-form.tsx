@@ -47,12 +47,14 @@ export type Props = {
     participantId?: string,
   ) => Promise<void>
   protectedParticipantIds?: string[]
+  onEditDefaultSplitting?: () => void
 }
 
 export function GroupForm({
   group,
   onSubmit,
   protectedParticipantIds = [],
+  onEditDefaultSplitting,
 }: Props) {
   const t = useTranslations('GroupForm')
   const form = useForm<GroupFormValues>({
@@ -254,7 +256,7 @@ export function GroupForm({
               ))}
             </ul>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex gap-2">
             <Button
               variant="secondary"
               onClick={() => {
@@ -264,6 +266,15 @@ export function GroupForm({
             >
               {t('Participants.add')}
             </Button>
+            {onEditDefaultSplitting && (
+              <Button
+                variant="ghost"
+                type="button"
+                onClick={onEditDefaultSplitting}
+              >
+                {t('Participants.defaultSplitting')}
+              </Button>
+            )}
           </CardFooter>
         </Card>
 

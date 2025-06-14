@@ -100,9 +100,16 @@
       "protectedParticipant": "This participant is part of expenses, and can not be removed.",
       "new": "New",
       "add": "Add participant",
+      "defaultSplitting": "Set default splitting",
       "John": "John",
       "Jane": "Jane",
-      "Jack": "Jack"
+    "Jack": "Jack"
+    },
+    "DefaultSplitting": {
+      "title": "Default splitting",
+      "description": "Set a default factor for each participant. This will pre-fill new expenses.",
+      "factorLabel": "Factor",
+      "reset": "Reset factors"
     },
     "Settings": {
       "title": "Local settings",

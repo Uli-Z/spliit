@@ -37,7 +37,7 @@ import { Save, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { useFieldArray, useForm, useWatch } from 'react-hook-form'
 import { Textarea } from './ui/textarea'
 
 export type Props = {
@@ -47,12 +47,16 @@ export type Props = {
     participantId?: string,
   ) => Promise<void>
   protectedParticipantIds?: string[]
+  onEditDefaultSplitting?: () => void
+  onParticipantsChange?: (participants: GroupFormValues['participants']) => void
 }
 
 export function GroupForm({
   group,
   onSubmit,
   protectedParticipantIds = [],
+  onEditDefaultSplitting,
+  onParticipantsChange,
 }: Props) {
   const t = useTranslations('GroupForm')
   const form = useForm<GroupFormValues>({
@@ -80,6 +84,15 @@ export function GroupForm({
     name: 'participants',
     keyName: 'key',
   })
+
+  const watchedParticipants = useWatch({
+    control: form.control,
+    name: 'participants',
+  })
+
+  useEffect(() => {
+    onParticipantsChange?.(watchedParticipants as any)
+  }, [watchedParticipants, onParticipantsChange])
 
   const [activeUser, setActiveUser] = useState<string | null>(null)
   useEffect(() => {
@@ -254,7 +267,7 @@ export function GroupForm({
               ))}
             </ul>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex gap-2">
             <Button
               variant="secondary"
               onClick={() => {
@@ -264,6 +277,15 @@ export function GroupForm({
             >
               {t('Participants.add')}
             </Button>
+            {onEditDefaultSplitting && (
+              <Button
+                variant="ghost"
+                type="button"
+                onClick={onEditDefaultSplitting}
+              >
+                {t('Participants.defaultSplitting')}
+              </Button>
+            )}
           </CardFooter>
         </Card>
 

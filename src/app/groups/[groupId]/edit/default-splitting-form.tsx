@@ -6,29 +6,28 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { SplittingOptions, splittingOptionsSchema } from '@/lib/schemas'
-import { trpc } from '@/trpc/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
-import type { getGroup } from '@/lib/api'
 
 export function DefaultSplittingForm({
-  group,
+  participants,
+  defaultSplittingOptions,
+  onSave,
 }: {
-  group: NonNullable<Awaited<ReturnType<typeof getGroup>>>
+  participants: { id: string; name: string }[]
+  defaultSplittingOptions?: SplittingOptions | null
+  onSave: (values: SplittingOptions) => Promise<void>
 }) {
   const t = useTranslations('GroupForm')
   const tDefault = useTranslations('GroupForm.DefaultSplitting')
-  const { mutateAsync } = trpc.groups.setDefaultSplittingOptions.useMutation()
-  const utils = trpc.useUtils()
 
   const defaultValues: SplittingOptions = {
     splitMode: 'BY_SHARES',
-    paidFor: group.participants.map((p) => {
-      const existing =
-        (group.defaultSplittingOptions as SplittingOptions | null)?.paidFor?.find(
-          (pf) => pf.participant === p.id,
-        )
+    paidFor: participants.map((p) => {
+      const existing = defaultSplittingOptions?.paidFor?.find(
+        (pf) => pf.participant === p.id,
+      )
       return { participant: p.id, shares: existing ? existing.shares : 1 }
     }),
   }
@@ -42,8 +41,7 @@ export function DefaultSplittingForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (values) => {
-          await mutateAsync({ groupId: group.id, splittingOptions: values })
-          await utils.groups.invalidate()
+          await onSave(values)
         })}
       >
         <Card className="mb-4">
@@ -53,7 +51,7 @@ export function DefaultSplittingForm({
           </CardHeader>
           <CardContent>
             <ul className="flex flex-col gap-2">
-              {group.participants.map((participant, index) => (
+              {participants.map((participant, index) => (
                 <li key={participant.id} className="flex items-center gap-2">
                   <FormLabel className="flex-1">
                     {participant.name}

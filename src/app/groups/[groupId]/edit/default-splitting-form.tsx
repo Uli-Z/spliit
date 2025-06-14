@@ -66,6 +66,8 @@ export function DefaultSplittingForm({
                         <FormControl>
                           <Input
                             type="number"
+                            min={1}
+                            step={1}
                             className="w-24"
                             placeholder={tDefault('factorLabel')}
                             {...field}
@@ -97,7 +99,7 @@ export function DefaultSplittingForm({
                   form.getValues().paidFor?.map((pf) => ({
                     ...pf,
                     shares: 1,
-                  })) ?? null,
+                  })) ?? [],
                 )
               }
             >

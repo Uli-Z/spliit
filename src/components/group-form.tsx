@@ -37,7 +37,7 @@ import { Save, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { useFieldArray, useForm, useWatch } from 'react-hook-form'
 import { Textarea } from './ui/textarea'
 
 export type Props = {
@@ -48,6 +48,7 @@ export type Props = {
   ) => Promise<void>
   protectedParticipantIds?: string[]
   onEditDefaultSplitting?: () => void
+  onParticipantsChange?: (participants: GroupFormValues['participants']) => void
 }
 
 export function GroupForm({
@@ -55,6 +56,7 @@ export function GroupForm({
   onSubmit,
   protectedParticipantIds = [],
   onEditDefaultSplitting,
+  onParticipantsChange,
 }: Props) {
   const t = useTranslations('GroupForm')
   const form = useForm<GroupFormValues>({
@@ -82,6 +84,15 @@ export function GroupForm({
     name: 'participants',
     keyName: 'key',
   })
+
+  const watchedParticipants = useWatch({
+    control: form.control,
+    name: 'participants',
+  })
+
+  useEffect(() => {
+    onParticipantsChange?.(watchedParticipants as any)
+  }, [watchedParticipants, onParticipantsChange])
 
   const [activeUser, setActiveUser] = useState<string | null>(null)
   useEffect(() => {

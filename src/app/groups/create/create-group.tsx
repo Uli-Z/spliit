@@ -1,7 +1,7 @@
 'use client'
 
 import { GroupForm } from '@/components/group-form'
-import { DefaultSplittingForm } from '@/app/groups/[groupId]/edit/default-splitting-form'
+import { CreateDefaultSplittingForm } from './default-splitting-form'
 import { SplittingOptions } from '@/lib/schemas'
 import { trpc } from '@/trpc/client'
 import { useRouter } from 'next/navigation'
@@ -31,7 +31,7 @@ export const CreateGroup = () => {
           const { groupId } = await mutateAsync({ groupFormValues })
           await utils.groups.invalidate()
           if (defaultOptions) {
-            const details = await trpc.groups.getDetails.fetch({ groupId })
+            const details = await utils.groups.getDetails.fetch({ groupId })
             await setDefaultSplitting({
               groupId,
               splittingOptions: {
@@ -47,7 +47,7 @@ export const CreateGroup = () => {
         }}
       />
       {showDefault && (
-        <DefaultSplittingForm
+        <CreateDefaultSplittingForm
           participants={participants.map((p, i) => ({ id: String(i), name: p.name }))}
           defaultSplittingOptions={defaultOptions ?? undefined}
           onSave={async (opts) => setDefaultOptions(opts)}

@@ -31,7 +31,7 @@ export const CreateGroup = () => {
           const { groupId } = await mutateAsync({ groupFormValues })
           await utils.groups.invalidate()
           if (defaultOptions) {
-            const details = await trpc.groups.getDetails.fetch({ groupId })
+            const details = await utils.groups.getDetails.fetch({ groupId })
             await setDefaultSplitting({
               groupId,
               splittingOptions: {

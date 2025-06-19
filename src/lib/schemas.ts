@@ -156,7 +156,7 @@ export const expenseFormSchema = z
 export type ExpenseFormValues = z.infer<typeof expenseFormSchema>
 
 export type SplittingOptions = {
-  // Used for saving default splitting options in localStorage
+  // Used for saving default splitting options in the database
   splitMode: SplitMode
   paidFor: ExpenseFormValues['paidFor'] | null
 }

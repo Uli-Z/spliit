@@ -1,15 +1,62 @@
 import { prisma } from '@/lib/prisma'
-import { ExpenseFormValues, GroupFormValues } from '@/lib/schemas'
+import {
+  ExpenseFormValues,
+  GroupFormValues,
+  SplittingOptions,
+} from '@/lib/schemas'
 import {
   ActivityType,
   Expense,
   RecurrenceRule,
   RecurringExpenseLink,
+  SplitMode,
 } from '@prisma/client'
 import { nanoid } from 'nanoid'
 
 export function randomId() {
   return nanoid()
+}
+
+export async function getDefaultSplittingOptions(
+  groupId: string,
+): Promise<SplittingOptions> {
+  const group = await prisma.group.findUnique({
+    where: { id: groupId },
+    include: { participants: true, defaultSplittingOptions: true },
+  })
+  if (!group) throw new Error(`Invalid group ID: ${groupId}`)
+
+  const base = {
+    splitMode: SplitMode.EVENLY,
+    paidFor: group.participants.map(({ id }) => ({
+      participant: id,
+      shares: 1,
+    })),
+  }
+
+  if (!group.defaultSplittingOptions) return base
+
+  const { splitMode, paidFor } = group.defaultSplittingOptions
+  return {
+    splitMode,
+    paidFor: (paidFor as { participant: string; shares: number }[] | null) ??
+      base.paidFor,
+  }
+}
+
+export async function setDefaultSplittingOptions(
+  groupId: string,
+  options: SplittingOptions,
+) {
+  await prisma.defaultSplittingOptions.upsert({
+    where: { groupId },
+    create: {
+      groupId,
+      splitMode: options.splitMode,
+      paidFor: options.paidFor,
+    },
+    update: { splitMode: options.splitMode, paidFor: options.paidFor },
+  })
 }
 
 export async function createGroup(groupFormValues: GroupFormValues) {
@@ -62,6 +109,13 @@ export async function createExpense(
     expenseFormValues.expenseDate,
     groupId,
   )
+
+  if (expenseFormValues.saveDefaultSplittingOptions) {
+    await setDefaultSplittingOptions(groupId, {
+      splitMode: expenseFormValues.splitMode,
+      paidFor: expenseFormValues.paidFor,
+    })
+  }
 
   return prisma.expense.create({
     data: {
@@ -200,6 +254,13 @@ export async function updateExpense(
     existingExpense.expenseDate,
   )
 
+  if (expenseFormValues.saveDefaultSplittingOptions) {
+    await setDefaultSplittingOptions(groupId, {
+      splitMode: expenseFormValues.splitMode,
+      paidFor: expenseFormValues.paidFor,
+    })
+  }
+
   return prisma.expense.update({
     where: { id: expenseId },
     data: {
@@ -321,7 +382,7 @@ export async function updateGroup(
 export async function getGroup(groupId: string) {
   return prisma.group.findUnique({
     where: { id: groupId },
-    include: { participants: true },
+    include: { participants: true, defaultSplittingOptions: true },
   })
 }
 

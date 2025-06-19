@@ -67,6 +67,7 @@ const enforceCurrencyPattern = (value: string) =>
 
 const getDefaultSplittingOptions = (
   group: NonNullable<AppRouterOutput['groups']['get']['group']>,
+  serverDefaults?: AppRouterOutput['groups']['get']['defaultSplittingOptions'],
 ) => {
   const defaultValue = {
     splitMode: 'EVENLY' as const,
@@ -76,71 +77,24 @@ const getDefaultSplittingOptions = (
     })),
   }
 
-  if (typeof localStorage === 'undefined') return defaultValue
-  const defaultSplitMode = localStorage.getItem(
-    `${group.id}-defaultSplittingOptions`,
-  )
-  if (defaultSplitMode === null) return defaultValue
-  const parsedDefaultSplitMode = JSON.parse(
-    defaultSplitMode,
-  ) as SplittingOptions
+  if (!serverDefaults) return defaultValue
 
-  if (parsedDefaultSplitMode.paidFor === null) {
-    parsedDefaultSplitMode.paidFor = defaultValue.paidFor
-  }
-
-  // if there is a participant in the default options that does not exist anymore,
-  // remove the stale default splitting options
-  for (const parsedPaidFor of parsedDefaultSplitMode.paidFor) {
-    if (
-      !group.participants.some(({ id }) => id === parsedPaidFor.participant)
-    ) {
-      localStorage.removeItem(`${group.id}-defaultSplittingOptions`)
-      return defaultValue
-    }
-  }
+  const paidFor =
+    serverDefaults.paidFor?.map((pf) => ({
+      participant: pf.participant,
+      shares: String(pf.shares) as unknown as number,
+    })) ?? defaultValue.paidFor
 
   return {
-    splitMode: parsedDefaultSplitMode.splitMode,
-    paidFor: parsedDefaultSplitMode.paidFor.map((paidFor) => ({
-      participant: paidFor.participant,
-      shares: String(paidFor.shares / 100) as unknown as number,
-    })),
+    splitMode: serverDefaults.splitMode,
+    paidFor,
   }
 }
 
-async function persistDefaultSplittingOptions(
-  groupId: string,
-  expenseFormValues: ExpenseFormValues,
-) {
-  if (localStorage && expenseFormValues.saveDefaultSplittingOptions) {
-    const computePaidFor = (): SplittingOptions['paidFor'] => {
-      if (expenseFormValues.splitMode === 'EVENLY') {
-        return expenseFormValues.paidFor.map(({ participant }) => ({
-          participant,
-          shares: '100' as unknown as number,
-        }))
-      } else if (expenseFormValues.splitMode === 'BY_AMOUNT') {
-        return null
-      } else {
-        return expenseFormValues.paidFor
-      }
-    }
-
-    const splittingOptions = {
-      splitMode: expenseFormValues.splitMode,
-      paidFor: computePaidFor(),
-    } satisfies SplittingOptions
-
-    localStorage.setItem(
-      `${groupId}-defaultSplittingOptions`,
-      JSON.stringify(splittingOptions),
-    )
-  }
-}
 
 export function ExpenseForm({
   group,
+  defaultSplittingOptions: defaultSplittingOptionsData,
   categories,
   expense,
   onSubmit,
@@ -148,6 +102,7 @@ export function ExpenseForm({
   runtimeFeatureFlags,
 }: {
   group: NonNullable<AppRouterOutput['groups']['get']['group']>
+  defaultSplittingOptions: AppRouterOutput['groups']['get']['defaultSplittingOptions'] | undefined
   categories: AppRouterOutput['categories']['list']['categories']
   expense?: AppRouterOutput['groups']['expenses']['get']['expense']
   onSubmit: (value: ExpenseFormValues, participantId?: string) => Promise<void>
@@ -171,7 +126,10 @@ export function ExpenseForm({
   const getSelectedRecurrenceRule = (field?: { value: string }) => {
     return field?.value as RecurrenceRule
   }
-  const defaultSplittingOptions = getDefaultSplittingOptions(group)
+  const defaultSplittingOptions = getDefaultSplittingOptions(
+    group,
+    defaultSplittingOptionsData,
+  )
   const form = useForm<ExpenseFormValues>({
     resolver: zodResolver(expenseFormSchema),
     defaultValues: expense
@@ -249,7 +207,6 @@ export function ExpenseForm({
   const activeUserId = useActiveUser(group.id)
 
   const submit = async (values: ExpenseFormValues) => {
-    await persistDefaultSplittingOptions(group.id, values)
     return onSubmit(values, activeUserId ?? undefined)
   }
 

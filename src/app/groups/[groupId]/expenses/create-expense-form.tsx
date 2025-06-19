@@ -14,6 +14,7 @@ export function CreateExpenseForm({
 }) {
   const { data: groupData } = trpc.groups.get.useQuery({ groupId })
   const group = groupData?.group
+  const defaultSplittingOptions = groupData?.defaultSplittingOptions
 
   const { data: categoriesData } = trpc.categories.list.useQuery()
   const categories = categoriesData?.categories
@@ -29,6 +30,7 @@ export function CreateExpenseForm({
   return (
     <ExpenseForm
       group={group}
+      defaultSplittingOptions={defaultSplittingOptions}
       categories={categories}
       onSubmit={async (expenseFormValues, participantId) => {
         await createExpenseMutateAsync({

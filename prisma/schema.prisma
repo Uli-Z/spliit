@@ -16,6 +16,7 @@ model Group {
   name         String
   information  String?       @db.Text
   currency     String        @default("$")
+  defaultSplittingOptions DefaultSplittingOptions?
   participants Participant[]
   expenses     Expense[]
   activities   Activity[]
@@ -126,4 +127,11 @@ enum ActivityType {
   CREATE_EXPENSE
   UPDATE_EXPENSE
   DELETE_EXPENSE
+}
+
+model DefaultSplittingOptions {
+  group     Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId   String    @id
+  splitMode SplitMode @default(EVENLY)
+  paidFor   Json?
 }

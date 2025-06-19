@@ -67,7 +67,7 @@ const enforceCurrencyPattern = (value: string) =>
 
 const getDefaultSplittingOptions = (
   group: NonNullable<AppRouterOutput['groups']['get']['group']>,
-  serverDefaults?: AppRouterOutput['groups']['get']['defaultSplittingOptions'],
+  serverDefaults: AppRouterOutput['groups']['get']['defaultSplittingOptions'],
 ) => {
   const defaultValue = {
     splitMode: 'EVENLY' as const,

@@ -1,2 +1,3 @@
 -- AlterTable
-ALTER TABLE "Group" ADD COLUMN "defaultSplittingOptions" JSONB;
+ALTER TABLE "Group" ADD COLUMN IF NOT EXISTS "defaultSplittingOptions" JSONB;
+

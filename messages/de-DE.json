@@ -176,7 +176,7 @@
       },
       "recurrenceRule": {
         "label": "Wiederholung",
-        "description": "Wähle wie oft die Ausgabe wiederholt werden soll.",
+        "description": "Wähle wie oft diese Ausgabe wiederholt werden soll.",
 
         "none": "Niemals",
         "daily": "Täglich",

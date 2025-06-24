@@ -75,7 +75,8 @@
     "NotFound": {
       "text": "该群组不存在。",
       "link": "跳转到最近访问过的群组"
-    }
+    },
+    "allGroups": "All groups"
   },
   "GroupForm": {
     "title": "群组信息",
@@ -140,7 +141,6 @@
       "recurrenceRule": {
         "label": "Expense Recurrence",
         "description": "Select how often the expense should repeat.",
-
         "none": "None",
         "daily": "Daily",
         "weekly": "Weekly",

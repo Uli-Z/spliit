@@ -104,6 +104,15 @@ NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT=true
 OPENAI_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
+### Password protect your instance
+
+Set the `SHARED_PASSWORD` environment variable to require a password before the
+application can be used. Users will be redirected to `/login` and, upon
+success, an HTTP-only cookie keeps them logged in. If this variable is not set,
+the application behaves as usual without any password prompt.
+
+On Vercel you can define this variable from the **Project > Settings > Environment Variables** page.
+
 ## License
 
 MIT, see [LICENSE](./LICENSE).

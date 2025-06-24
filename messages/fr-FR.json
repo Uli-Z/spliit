@@ -75,7 +75,8 @@
     "NotFound": {
       "text": "Ce groupe n'existe pas.",
       "link": "Aller aux groupes récemment visités"
-    }
+    },
+    "allGroups": "All groups"
   },
   "GroupForm": {
     "title": "Informations sur le groupe",
@@ -140,7 +141,6 @@
       "recurrenceRule": {
         "label": "Expense Recurrence",
         "description": "Select how often the expense should repeat.",
-
         "none": "None",
         "daily": "Daily",
         "weekly": "Weekly",

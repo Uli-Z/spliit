@@ -75,7 +75,8 @@
     "NotFound": {
       "text": "Этой группы не существует",
       "link": "Перейти к списку недавних групп"
-    }
+    },
+    "allGroups": "All groups"
   },
   "GroupForm": {
     "title": "Сведения о группе",
@@ -140,7 +141,6 @@
       "recurrenceRule": {
         "label": "Expense Recurrence",
         "description": "Select how often the expense should repeat.",
-
         "none": "None",
         "daily": "Daily",
         "weekly": "Weekly",

@@ -47,8 +47,9 @@ If you want to contribute financially and help us keep the application free and 
 1. Clone the repository (or fork it if you intend to contribute)
 2. Start a PostgreSQL server. You can run `./scripts/start-local-db.sh` if you don’t have a server already.
 3. Copy the file `.env.example` as `.env`
-4. Run `npm install` to install dependencies. This will also apply database migrations and update Prisma Client.
-5. Run `npm run dev` to start the development server
+4. Edit `.env` to override variables as needed. Set `SHARED_PASSWORD` here if you want password protection locally.
+5. Run `npm install` to install dependencies. This will also apply database migrations and update Prisma Client.
+6. Run `npm run dev` to start the development server
 
 ## Run in a container
 
@@ -103,6 +104,20 @@ You can offer users to automatically deduce the expense category from the title.
 NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT=true
 OPENAI_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
+
+### Password protect your instance
+
+Set the `SHARED_PASSWORD` environment variable to require a password before the
+application can be used. Users will be redirected to `/login` and, upon
+success, an HTTP-only cookie keeps them logged in. If this variable is not set,
+the application behaves as usual without any password prompt.
+
+Locally, define `SHARED_PASSWORD` in your `.env` file **before** running `npm run dev`
+or `npm run build`. Environment variables are read during the build, so if you change the
+password later you must rebuild (or restart the dev server) for it to take effect. During
+the build you will see a log message confirming whether password protection is enabled.
+
+On Vercel you can define this variable from the **Project > Settings > Environment Variables** page.
 
 ## License
 

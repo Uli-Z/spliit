@@ -6,7 +6,15 @@ import Link from 'next/link'
 // FIX for https://github.com/vercel/next.js/issues/58615
 // export const dynamic = 'force-dynamic'
 
-export default function HomePage() {
+import { getRuntimeFeatureFlags } from '@/lib/featureFlags'
+import { redirect } from 'next/navigation'
+
+export default async function HomePage() {
+  const { singleGroupMode } = await getRuntimeFeatureFlags()
+  if (singleGroupMode) {
+    redirect('/groups')
+  }
+
   const t = useTranslations()
   return (
     <main>

@@ -8,6 +8,7 @@ import { groupStatsRouter } from '@/trpc/routers/groups/stats'
 import { updateGroupProcedure } from '@/trpc/routers/groups/update.procedure'
 import { getGroupDetailsProcedure } from './getDetails.procedure'
 import { listGroupsProcedure } from './list.procedure'
+import { listAllGroupsProcedure } from './listAll.procedure'
 import { updateDefaultSplittingOptionsProcedure } from './updateDefaultSplittingOptions.procedure'
 
 export const groupsRouter = createTRPCRouter({
@@ -19,6 +20,7 @@ export const groupsRouter = createTRPCRouter({
   get: getGroupProcedure,
   getDetails: getGroupDetailsProcedure,
   list: listGroupsProcedure,
+  listAll: listAllGroupsProcedure,
   create: createGroupProcedure,
   update: updateGroupProcedure,
   updateDefaultSplittingOptions: updateDefaultSplittingOptionsProcedure,

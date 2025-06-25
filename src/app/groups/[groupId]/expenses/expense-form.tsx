@@ -172,7 +172,9 @@ export function ExpenseForm({
               : undefined,
           ],
           isReimbursement: true,
-          splitMode: defaultSplittingOptions.splitMode,
+          // Mark as paid reimbursements should always be split evenly
+          // independent of any stored default splitting options.
+          splitMode: 'EVENLY',
           saveDefaultSplittingOptions: false,
           documents: [],
           notes: '',
@@ -504,7 +506,7 @@ export function ExpenseForm({
                     defaultValue={getSelectedRecurrenceRule(field)}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="NONE" />
+                      <SelectValue placeholder={t(`${sExpense}.recurrenceRule.none`)} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="NONE">

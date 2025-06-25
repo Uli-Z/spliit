@@ -12,7 +12,19 @@
   },
   "Footer": {
     "madeIn": "Entwickelt in Montréal, Québec 🇨🇦",
-    "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>"
+    "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>",
+    "originalRepo": "GitHub (Spliit)",
+    "forkRepo": "GitHub (Spliit-Room)",
+    "forkNotice": "Spliit-Room, a fork of <upstream>Spliit</upstream>"
+  },
+  "Login": {
+    "description": "Zugang eingeschränkt - bitte gebe das Passwort an",
+    "password": "Passwort",
+    "enter": "Anmelden",
+    "wrongPassword": "Falsches Passwort"
+  },
+  "Currency": {
+    "default": "€"
   },
   "Expenses": {
     "title": "Ausgaben",
@@ -75,7 +87,8 @@
     "NotFound": {
       "text": "Diese Gruppe existiert nicht.",
       "link": "Gehe zu zuletzt besuchten Gruppen"
-    }
+    },
+    "allGroups": "Alle Gruppen"
   },
   "GroupForm": {
     "title": "Gruppeninformationen",
@@ -140,7 +153,6 @@
       "recurrenceRule": {
         "label": "Wiederholung",
         "description": "Wähle wie oft die Einnahme wiederholt werden soll.",
-
         "none": "Niemals",
         "daily": "Täglich",
         "weekly": "Wöchentlich",
@@ -169,6 +181,15 @@
       "paidByField": {
         "label": "Gezahlt von",
         "description": "Wähle das Mitglied, das die Ausgabe bezahlt hat."
+      },
+      "recurrenceRule": {
+        "label": "Wiederholung",
+        "description": "Wähle, wie oft die Ausgabe wiederholt werden soll.",
+
+        "none": "Keine",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "paidFor": {
         "title": "Gezahlt für",

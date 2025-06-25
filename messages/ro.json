@@ -75,7 +75,8 @@
     "NotFound": {
       "text": "Acest grup nu există.",
       "link": "Mergi la ultimele grupuri vizitate"
-    }
+    },
+    "allGroups": "All groups"
   },
   "GroupForm": {
     "title": "Informații despre grup",
@@ -131,7 +132,6 @@
       "recurrenceRule": {
         "label": "Expense Recurrence",
         "description": "Select how often the expense should repeat.",
-
         "none": "None",
         "daily": "Daily",
         "weekly": "Weekly",

@@ -1,8 +1,18 @@
 [<img alt="Spliit" height="60" src="https://github.com/spliit-app/spliit/blob/main/public/logo-with-text.png?raw=true" />](https://spliit.app)
+ 
+**Fork-specific changes** This version adds a open-group mode and optional password protection. Both features can be enabled via environment variables in your `.env` file:
+
+```bash
+NEXT_PUBLIC_OPEN_GROUP_MODE=true
+SHARED_PASSWORD="your-password"
+```
 
 Spliit is a free and open source alternative to Splitwise. You can either use the official instance at [Spliit.app](https://spliit.app), or deploy your own instance:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fspliit-app%2Fspliit&project-name=my-spliit-instance&repository-name=my-spliit-instance&stores=%5B%7B%22type%22%3A%22postgres%22%7D%5D&)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FUli-Z%2Fspliit-room&project-name=my-spliit-room-instance&repository-name=my-spliit-room-instance)
+
+## Why this fork?
+Spliit is a great tool — simple, privacy-friendly, and perfect for managing shared expenses without requiring accounts or personal data. It works especially well for spontaneous groups where links are shared casually. However, in fixed communities like shared flats, collectives, or organizations, this model can be inconvenient. Links get lost, duplicate groups pop up, and there's no central overview. Spliit-Room addresses this by making all groups visible to all users within a single, shared space. Access is protected by a common password, preserving Spliit's minimalist spirit while adapting it to the needs of stable, long-term communities.
 
 ## Features
 

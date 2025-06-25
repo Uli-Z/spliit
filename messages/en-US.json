@@ -12,7 +12,16 @@
   },
   "Footer": {
     "madeIn": "Made in Montréal, Québec 🇨🇦",
-    "builtBy": "Built by <author>Sebastien Castiel</author> and <source>contributors</source>"
+    "builtBy": "Built by <author>Sebastien Castiel</author> and <source>contributors</source>",
+    "originalRepo": "GitHub (Spliit)",
+    "forkRepo": "GitHub (Spliit-Room)",
+    "forkNotice": "Spliit-Room, a fork of <upstream>Spliit</upstream>"
+  },
+  "Login": {
+    "description": "Access restricted - please enter the password"
+  },
+  "Currency": {
+    "default": "$"
   },
   "Expenses": {
     "title": "Expenses",
@@ -76,7 +85,8 @@
     "NotFound": {
       "text": "This group does not exist.",
       "link": "Go to recently visited groups"
-    }
+    },
+    "allGroups": "All groups"
   },
   "GroupForm": {
     "title": "Group information",
@@ -165,7 +175,6 @@
       "recurrenceRule": {
         "label": "Expense Recurrence",
         "description": "Select how often the expense should repeat.",
-
         "none": "None",
         "daily": "Daily",
         "weekly": "Weekly",

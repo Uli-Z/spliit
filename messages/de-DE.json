@@ -14,6 +14,9 @@
     "madeIn": "Entwickelt in Montréal, Québec 🇨🇦",
     "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>"
   },
+  "Currency": {
+    "default": "€"
+  },
   "Expenses": {
     "title": "Ausgaben",
     "description": "Hier sind die Ausgaben, die du für deine Gruppe erstellt hast.",
@@ -139,12 +142,13 @@
         "description": "Wähle das Mitglied, das die Einnahme erhalten hat."
       },
       "recurrenceRule": {
-        "label": "Expense Recurrence",
-        "description": "Select how often the expense should repeat.",
-        "none": "None",
-        "daily": "Daily",
-        "weekly": "Weekly",
-        "monthly": "Monthly"
+        "label": "Wiederholung",
+        "description": "Wähle wie oft die Einnahme wiederholt werden soll.",
+
+        "none": "Niemals",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "paidFor": {
         "title": "Empfangen für",
@@ -173,6 +177,15 @@
       "paidFor": {
         "title": "Gezahlt für",
         "description": "Wähle für wen die Ausgabe gezahlt wurde."
+      },
+      "recurrenceRule": {
+        "label": "Wiederholung",
+        "description": "Wähle wie oft die Ausgabe wiederholt werden soll.",
+
+        "none": "Niemals",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "splitModeDescription": "Wähle, wie die Ausgabe aufgeteilt werden soll.",
       "attachDescription": "Füge der Ausgabe einen Beleg hinzu."

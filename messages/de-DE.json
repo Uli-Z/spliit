@@ -16,7 +16,7 @@
   },
   "Login": {
     "description": "Zugang eingeschränkt - bitte gebe das Passwort an"
-  }
+  },
   "Currency": {
     "default": "€"
   },

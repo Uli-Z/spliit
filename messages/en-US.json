@@ -16,7 +16,7 @@
   },
   "Login": {
     "description": "Access restricted - please enter the password"
-  }
+  },
   "Currency": {
     "default": "$"
   },

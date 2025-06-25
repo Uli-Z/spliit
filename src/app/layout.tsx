@@ -108,17 +108,6 @@ function Content({ children }: { children: React.ReactNode }) {
 
       <footer className="sm:p-8 md:p-16 sm:mt-16 sm:text-sm md:text-base md:mt-32 bg-slate-50 dark:bg-card border-t p-6 mt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-xs [&_a]:underline">
         <div className="flex flex-col space-y-2">
-          <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
-            <Link className="flex items-center gap-2" href="/">
-              <Image
-                src="/logo-with-text.png"
-                className="m-1 h-auto w-auto"
-                width={(35 * 522) / 180}
-                height={35}
-                alt="Spliit"
-              />
-            </Link>
-          </div>
           <div className="flex flex-col space-y a--no-underline-text-white">
             <span>{t('Footer.madeIn')}</span>
             <span>
@@ -130,14 +119,57 @@ function Content({ children }: { children: React.ReactNode }) {
                 ),
                 source: (txt) => (
                   <a
-                    href="https://github.com/spliit-app/spliit/graphs/contributors"
+                    href="https://github.com/Uli-Z/spliit-room/graphs/contributors"
                     target="_blank"
                     rel="noopener"
+                    className="inline-flex items-center space-x-1"
                   >
+                    <img
+                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                      alt="GitHub logo"
+                      className="w-4 h-4"
+                    />
+                    <span>{txt}</span>
+                  </a>
+                ),
+              })}
+            </span>
+            <span>
+              {t.rich('Footer.forkNotice', {
+                upstream: (txt) => (
+                  <a href="https://spliit.app" target="_blank" rel="noopener">
                     {txt}
                   </a>
                 ),
               })}
+            </span>
+            <span className="flex items-center space-x-4">
+              <a
+                href="https://github.com/spliit-app/spliit"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center space-x-1"
+              >
+                <img
+                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                  alt="GitHub logo"
+                  className="w-4 h-4"
+                />
+                <span>{t('Footer.originalRepo')}</span>
+              </a>
+              <a
+                href="https://github.com/Uli-Z/spliit-room"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center space-x-1"
+              >
+                <img
+                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                  alt="GitHub logo"
+                  className="w-4 h-4"
+                />
+                <span>{t('Footer.forkRepo')}</span>
+              </a>
             </span>
           </div>
         </div>

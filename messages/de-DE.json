@@ -12,7 +12,10 @@
   },
   "Footer": {
     "madeIn": "Entwickelt in Montréal, Québec 🇨🇦",
-    "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>"
+    "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>",
+    "originalRepo": "GitHub (Spliit)",
+    "forkRepo": "GitHub (Spliit-Room)",
+    "forkNotice": "Spliit-Room, a fork of <upstream>Spliit</upstream>"
   },
   "Login": {
     "description": "Zugang eingeschränkt - bitte gebe das Passwort an",

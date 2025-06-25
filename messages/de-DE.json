@@ -15,7 +15,10 @@
     "builtBy": "Erstellt von <author>Sebastien Castiel</author> und <source>Mitwirkenden</source>"
   },
   "Login": {
-    "description": "Zugang eingeschränkt - bitte gebe das Passwort an"
+    "description": "Zugang eingeschränkt - bitte gebe das Passwort an",
+    "password": "Passwort",
+    "enter": "Anmelden",
+    "wrongPassword": "Falsches Passwort"
   },
   "Currency": {
     "default": "€"
@@ -145,13 +148,13 @@
         "description": "Wähle das Mitglied, das die Einnahme erhalten hat."
       },
       "recurrenceRule": {
-        "label": "Expense Recurrence",
-        "description": "Select how often the expense should repeat.",
+        "label": "Wiederholung",
+        "description": "Wähle, wie oft die Ausgabe wiederholt werden soll.",
 
-        "none": "None",
-        "daily": "Daily",
-        "weekly": "Weekly",
-        "monthly": "Monthly"
+        "none": "Keine",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "paidFor": {
         "title": "Empfangen für",
@@ -176,6 +179,15 @@
       "paidByField": {
         "label": "Gezahlt von",
         "description": "Wähle das Mitglied, das die Ausgabe bezahlt hat."
+      },
+      "recurrenceRule": {
+        "label": "Wiederholung",
+        "description": "Wähle, wie oft die Ausgabe wiederholt werden soll.",
+
+        "none": "Keine",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "paidFor": {
         "title": "Gezahlt für",

@@ -24,7 +24,7 @@ export default function LoginPage() {
       router.push('/')
       router.refresh()
     } else {
-      setError('Wrong password')
+      setError(t('wrongPassword'))
     }
   }
 
@@ -32,9 +32,9 @@ export default function LoginPage() {
     <main className="min-h-screen flex items-center justify-center p-4">
       <form onSubmit={handleSubmit} className="space-y-4 max-w-sm w-full">
         <p className="text-center text-sm text-muted-foreground">{t('description')}</p>
-        <Input type="password" name="password" placeholder="Password" required />
+        <Input type="password" name="password" placeholder={t('password')} required />
         {error && <p className="text-destructive text-sm">{error}</p>}
-        <Button type="submit" className="w-full">Enter</Button>
+        <Button type="submit" className="w-full">{t('enter')}</Button>
       </form>
     </main>
   )

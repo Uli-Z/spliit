@@ -506,7 +506,7 @@ export function ExpenseForm({
                     defaultValue={getSelectedRecurrenceRule(field)}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="NONE" />
+                      <SelectValue placeholder={t(`${sExpense}.recurrenceRule.none`)} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="NONE">

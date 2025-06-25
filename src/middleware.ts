@@ -12,7 +12,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon') ||
     pathname.startsWith('/apple-icon') ||
-    pathname.startsWith('/android-chrome')
+    pathname.startsWith('/android-chrome') ||
+    pathname.match(/\.[a-zA-Z0-9]+$/)
   ) {
     return NextResponse.next()
   }
@@ -28,7 +29,9 @@ export function middleware(request: NextRequest) {
   }
 
   const loginUrl = request.nextUrl.clone()
+  const requestedPath = request.nextUrl.pathname + request.nextUrl.search
   loginUrl.pathname = '/login'
+  loginUrl.searchParams.set('callbackUrl', requestedPath)
   return NextResponse.redirect(loginUrl)
 }
 

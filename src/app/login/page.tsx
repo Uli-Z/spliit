@@ -1,13 +1,14 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 export default function LoginPage() {
   const router = useRouter()
   const t = useTranslations('Login')
+  const searchParams = useSearchParams()
   const [error, setError] = useState('')
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -21,7 +22,8 @@ export default function LoginPage() {
       body: JSON.stringify({ password }),
     })
     if (res.ok) {
-      router.push('/')
+      const callback = searchParams.get('callbackUrl') ?? '/'
+      router.push(callback)
       router.refresh()
     } else {
       setError(t('wrongPassword'))

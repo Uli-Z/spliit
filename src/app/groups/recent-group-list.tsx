@@ -69,7 +69,7 @@ export function RecentGroupList({
   const [state, setState] = useState<RecentGroupsState>({ status: 'pending' })
 
   function loadGroups() {
-    const groupsInStorage = runtimeFeatureFlags.singleGroupMode
+    const groupsInStorage = runtimeFeatureFlags.openGroupMode
       ? []
       : getRecentGroups()
     const starredGroups = getStarredGroups()
@@ -113,7 +113,7 @@ function RecentGroupList_({
   runtimeFeatureFlags: RuntimeFeatureFlags
 }) {
   const t = useTranslations('Groups')
-  const { data, isLoading } = runtimeFeatureFlags.singleGroupMode
+  const { data, isLoading } = runtimeFeatureFlags.openGroupMode
     ? trpc.groups.listAll.useQuery()
     : trpc.groups.list.useQuery({
         groupIds: groups.map((group) => group.id),
@@ -152,7 +152,7 @@ function RecentGroupList_({
     )
   }
 
-  const allGroups = runtimeFeatureFlags.singleGroupMode
+  const allGroups = runtimeFeatureFlags.openGroupMode
     ? data.groups.map((g) => ({ id: g.id, name: g.name }))
     : groups
 
@@ -259,11 +259,11 @@ function GroupsPage({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <h1 className="font-bold text-2xl flex-1">
           <Link href="/groups">
-            {t(runtimeFeatureFlags.singleGroupMode ? 'allGroups' : 'myGroups')}
+            {t(runtimeFeatureFlags.openGroupMode ? 'allGroups' : 'myGroups')}
           </Link>
         </h1>
         <div className="flex gap-2">
-          {!runtimeFeatureFlags.singleGroupMode && (
+          {!runtimeFeatureFlags.openGroupMode && (
             <AddGroupByUrlButton reload={reload} />
           )}
           <Button asChild>

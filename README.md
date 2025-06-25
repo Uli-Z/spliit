@@ -3,7 +3,7 @@
 **Fork-specific changes** This version adds a open-group mode and optional password protection. Both features can be enabled via environment variables in your `.env` file:
 
 ```bash
-NEXT_PUBLIC_SINGLE_GROUP_MODE=true
+NEXT_PUBLIC_OPEN_GROUP_MODE=true
 SHARED_PASSWORD="your-password"
 ```
 

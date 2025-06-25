@@ -10,8 +10,8 @@ import { getRuntimeFeatureFlags } from '@/lib/featureFlags'
 import { redirect } from 'next/navigation'
 
 export default async function HomePage() {
-  const { singleGroupMode } = await getRuntimeFeatureFlags()
-  if (singleGroupMode) {
+  const { openGroupMode } = await getRuntimeFeatureFlags()
+  if (openGroupMode) {
     redirect('/groups')
   }
 

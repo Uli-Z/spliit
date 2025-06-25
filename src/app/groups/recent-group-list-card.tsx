@@ -94,7 +94,7 @@ export function RecentGroupListCard({
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    {!runtimeFeatureFlags.singleGroupMode && (
+                    {!runtimeFeatureFlags.openGroupMode && (
                       <DropdownMenuItem
                         className="text-destructive"
                         onClick={(event) => {

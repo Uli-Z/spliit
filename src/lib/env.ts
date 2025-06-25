@@ -21,7 +21,7 @@ const envSchema = z
       interpretEnvVarAsBool,
       z.boolean().default(false),
     ),
-    NEXT_PUBLIC_SINGLE_GROUP_MODE: z.preprocess(
+    NEXT_PUBLIC_OPEN_GROUP_MODE: z.preprocess(
       interpretEnvVarAsBool,
       z.boolean().default(false),
     ),

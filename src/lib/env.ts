@@ -71,9 +71,3 @@ const envSchema = z
   })
 
 export const env = envSchema.parse(process.env)
-
-if (env.SHARED_PASSWORD) {
-  console.log('Password protection enabled during build')
-} else {
-  console.log('No password set; app will run without protection')
-}

@@ -65,6 +65,7 @@ export const viewport: Viewport = {
 
 function Content({ children }: { children: React.ReactNode }) {
   const t = useTranslations()
+  const { NEXT_PUBLIC_HEADER_TITLE, NEXT_PUBLIC_HEADER_LOGO_SECOND } = env
   return (
     <TRPCProvider>
       <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
@@ -72,7 +73,7 @@ function Content({ children }: { children: React.ReactNode }) {
           className="flex items-center gap-2 hover:scale-105 transition-transform"
           href="/"
         >
-          <h1>
+          <h1 className="flex items-center gap-2">
             <Image
               src="/logo-with-text.png"
               className="m-1 h-auto w-auto"
@@ -80,6 +81,20 @@ function Content({ children }: { children: React.ReactNode }) {
               height={35}
               alt="Spliit"
             />
+            {NEXT_PUBLIC_HEADER_TITLE && (
+              <span className="hidden sm:block whitespace-nowrap text-[2.4rem] leading-none font-semibold">
+                {NEXT_PUBLIC_HEADER_TITLE}
+              </span>
+            )}
+            {NEXT_PUBLIC_HEADER_LOGO_SECOND && (
+              <Image
+                src={NEXT_PUBLIC_HEADER_LOGO_SECOND}
+                alt=""
+                className="h-full w-auto object-contain"
+                width={35}
+                height={35}
+              />
+            )}
           </h1>
         </Link>
         <div role="navigation" aria-label="Menu" className="flex">

@@ -70,34 +70,43 @@ function Content({ children }: { children: React.ReactNode }) {
     <TRPCProvider>
       <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
         <Link
-          className="flex items-center gap-2 hover:scale-105 transition-transform"
           href="/"
+          className="flex items-center gap-3 hover:scale-105 transition-transform"
         >
-          <h1 className="flex items-center gap-2">
+          {/* Primary logo alone */}
+          <h1 className="shrink-0">
             <Image
               src="/logo-with-text.png"
-              className="m-1 h-auto w-auto"
-              width={(35 * 522) / 180}
-              height={35}
+              width={(40 * 522) / 180}
+              height={40}
               alt="Spliit"
+              className="h-10 w-auto"
+              priority
             />
-            {NEXT_PUBLIC_HEADER_TITLE && (
-              <span className="hidden sm:block whitespace-nowrap text-[2.4rem] leading-none font-semibold">
-                {NEXT_PUBLIC_HEADER_TITLE}
-              </span>
-            )}
-            {NEXT_PUBLIC_HEADER_LOGO_SECOND && (
+          </h1>
+
+          {/* Secondary logo auto-scaled */}
+          {NEXT_PUBLIC_HEADER_LOGO_SECOND && (
+            <div className="relative h-10 w-auto">
               <Image
                 src={NEXT_PUBLIC_HEADER_LOGO_SECOND}
                 alt=""
-                className="h-full w-auto object-contain"
-                width={35}
-                height={35}
+                fill
+                className="object-contain"
+                sizes="100vw"
               />
-            )}
-          </h1>
+            </div>
+          )}
+
+          {/* Title next to logos */}
+          {NEXT_PUBLIC_HEADER_TITLE && (
+            <span className="hidden sm:block whitespace-nowrap text-[2.4rem] leading-none font-semibold">
+              {NEXT_PUBLIC_HEADER_TITLE}
+            </span>
+          )}
         </Link>
-        <div role="navigation" aria-label="Menu" className="flex">
+
+        <nav role="navigation" aria-label="Menu" className="flex">
           <ul className="flex items-center text-sm">
             <li>
               <Button
@@ -116,7 +125,7 @@ function Content({ children }: { children: React.ReactNode }) {
               <ThemeToggle />
             </li>
           </ul>
-        </div>
+        </nav>
       </header>
 
       <div className="flex-1 flex flex-col">{children}</div>
@@ -165,7 +174,7 @@ function Content({ children }: { children: React.ReactNode }) {
                 rel="noopener"
                 className="inline-flex items-center space-x-1"
               >
-                <img
+                <Image
                   src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                   alt="GitHub logo"
                   className="w-4 h-4"
@@ -178,7 +187,7 @@ function Content({ children }: { children: React.ReactNode }) {
                 rel="noopener"
                 className="inline-flex items-center space-x-1"
               >
-                <img
+                <Image
                   src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                   alt="GitHub logo"
                   className="w-4 h-4"

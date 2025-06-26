@@ -148,7 +148,7 @@ function Content({ children }: { children: React.ReactNode }) {
                     rel="noopener"
                     className="inline-flex items-center space-x-1"
                   >
-                    <img
+                    <Image
                       src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                       alt="GitHub logo"
                       className="w-4 h-4"

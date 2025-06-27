@@ -68,7 +68,7 @@ const enforceCurrencyPattern = (value: string) =>
 
 const getDefaultSplittingOptions = (
   group: NonNullable<AppRouterOutput['groups']['get']['group']>,
-) => {
+): SplittingOptions => {
   const defaultValue = {
     splitMode: 'EVENLY' as const,
     paidFor: group.participants.map(({ id }) => ({
@@ -190,7 +190,7 @@ export function ExpenseForm({
             ? Number(searchParams.get('categoryId'))
             : 0, // category with Id 0 is General
           // paid for all, split evenly
-          paidFor: defaultSplittingOptions.paidFor,
+          paidFor: defaultSplittingOptions.paidFor!,
           paidBy: getSelectedPayer(),
           isReimbursement: false,
           splitMode: defaultSplittingOptions.splitMode,

@@ -18,7 +18,9 @@
     "forkNotice": "Spliit-Room, a fork of <upstream>Spliit</upstream>"
   },
   "Login": {
-    "description": "Access restricted - please enter the password"
+    "description": "Access restricted - please enter the password",
+    "wrongPassword": "Wrong password",
+    "tooManyAttempts": "Too many login attempts. Please try again later."
   },
   "Currency": {
     "default": "$"

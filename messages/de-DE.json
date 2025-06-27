@@ -21,7 +21,8 @@
     "description": "Zugang eingeschränkt - bitte gebe das Passwort an",
     "password": "Passwort",
     "enter": "Anmelden",
-    "wrongPassword": "Falsches Passwort"
+    "wrongPassword": "Falsches Passwort",
+    "tooManyAttempts": "Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut."
   },
   "Currency": {
     "default": "€"
@@ -152,9 +153,8 @@
       },
       "recurrenceRule": {
         "label": "Wiederholung",
-        "description": "Wähle, wie oft die Ausgabe wiederholt werden soll.",
-
-        "none": "Keine",
+        "description": "Wähle wie oft die Einnahme wiederholt werden soll.",
+        "none": "Niemals",
         "daily": "Täglich",
         "weekly": "Wöchentlich",
         "monthly": "Monatlich"
@@ -195,6 +195,15 @@
       "paidFor": {
         "title": "Gezahlt für",
         "description": "Wähle für wen die Ausgabe gezahlt wurde."
+      },
+      "recurrenceRule": {
+        "label": "Wiederholung",
+        "description": "Wähle wie oft diese Ausgabe wiederholt werden soll.",
+
+        "none": "Niemals",
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
       },
       "splitModeDescription": "Wähle, wie die Ausgabe aufgeteilt werden soll.",
       "attachDescription": "Füge der Ausgabe einen Beleg hinzu."

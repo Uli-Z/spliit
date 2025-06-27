@@ -128,3 +128,10 @@ enum ActivityType {
   UPDATE_EXPENSE
   DELETE_EXPENSE
 }
+
+model LoginAttempt {
+  ip           String   @id
+  count        Int
+  lastAttempt  DateTime
+  lockoutUntil DateTime
+}

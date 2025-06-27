@@ -25,6 +25,10 @@ export default function LoginPage() {
       const callback = searchParams.get('callbackUrl') ?? '/'
       router.push(callback)
       router.refresh()
+    } else if (res.status === 429) {
+      interface LoginErrorResponse { message?: string }
+      const data = await res.json() as LoginErrorResponse
+      setError(data.message || t('tooManyAttempts'))
     } else {
       setError(t('wrongPassword'))
     }

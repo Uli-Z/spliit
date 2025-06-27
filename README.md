@@ -3,11 +3,15 @@
 **Fork-specific changes** This version adds a open-group mode, optional password protection, and a customizable header. The features can be enabled via environment variables in your `.env` file:
 
 ```bash
+# Show all groups on the landing page
 NEXT_PUBLIC_OPEN_GROUP_MODE=true
+
+# Password protect the instance
 SHARED_PASSWORD="your-password"
+
 # Optional: add a title and second logo in the header
-# NEXT_PUBLIC_HEADER_TITLE="My Instance"
-# NEXT_PUBLIC_HEADER_LOGO_SECOND="/logo2.png"
+NEXT_PUBLIC_HEADER_TITLE="My Instance"
+NEXT_PUBLIC_HEADER_LOGO_SECOND="/logo2.png"
 ```
 
 Spliit is a free and open source alternative to Splitwise. You can either use the official instance at [Spliit.app](https://spliit.app), or deploy your own instance:

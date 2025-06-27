@@ -21,7 +21,8 @@
     "description": "Zugang eingeschränkt - bitte gebe das Passwort an",
     "password": "Passwort",
     "enter": "Anmelden",
-    "wrongPassword": "Falsches Passwort"
+    "wrongPassword": "Falsches Passwort",
+    "tooManyAttempts": "Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut."
   },
   "Currency": {
     "default": "€"

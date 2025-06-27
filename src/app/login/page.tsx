@@ -23,6 +23,10 @@ export default function LoginPage() {
     if (res.ok) {
       router.push('/')
       router.refresh()
+    } else if (res.status === 429) {
+      interface LoginErrorResponse { message?: string }
+      const data = await res.json() as LoginErrorResponse
+      setError(data.message || t('tooManyAttempts'))
     } else {
       setError(t('wrongPassword'))
     }
